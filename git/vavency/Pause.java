@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public final class Pause //Honestly this class is redundant.
 {
-    private Pause(int milliseconds)
+    public Pause(int milliseconds)
     {
         try //hacko
         {

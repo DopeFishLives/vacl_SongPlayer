@@ -22,6 +22,7 @@ public class SongPlayer
         for(int i=0; i<sng.size();i++)
         {
             System.out.println("[" + sng.getTitle() + "]: " + sng.getLyrics(i));
+            new Pause(1000/this.spd);
         }
     }
 
