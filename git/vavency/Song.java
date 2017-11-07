@@ -7,7 +7,7 @@ public class Song {
     {
 
     }
-
+/*
     public List<String> getLyrics()
     {
 
@@ -17,4 +17,5 @@ public class Song {
     {
 
     }
+    */
 }
