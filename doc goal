@@ -1,0 +1,138 @@
+#1: Programa "SongPlayer", kurios pagrindinė paskirtis - groti įvarias dainas. Programa leidžia kontroliuoti
+kokiu greičiu turėtų būti grojama daina. Greičiai yra nuo 1 iki 5, kur 1 - lėčiausiai, 5 - greičiausiai. Muzikos grojimas
+yra realizuotas išspausdinant dainos tekstą po vieną eilutę į konsolę tokiu formatu: [dainos pavadinimas]: teksto eilutė.
+
+*** Reikalavimų detalizacija
+
+- Programa turi spausdinti dainos teksto eilutes su pauzėmis, kur pauzės dydis apibrėžia dainos grojimo greitį;
+- Pauzės apskaičiavimo formulė: pause = 1000 / greitis, kur greitis yra viena iš reikšmių [nuo 1 iki 5];
+
+Paprastai tariant, kiekvieną dainos eilutę spausdinate į konsolę kas kažkiek milisekundžių. Tarkime, jei greitis yra:
+- 1 - eilutė kas sekundę (1000 milisekundžių)
+- 2 - eilutė kas pusę sekundės
+- 5 - eilutė kas 200 milisekundžių
+
+*** Papildoma informacija
+
+- Programos pristabdymui nurodytam kiekiui milisekundžių galite pasinaudoti paruošta pagalbine klase:
+
+public final class Pause {
+
+	private Pause() {
+		throw new UnsupportedOperationException("Object creation is prohibited.");
+	}
+
+	/**
+	* Pauses program execution for a specified amount of milliseconds.
+	* @param milliseconds - pause duration
+	*/
+	public static void duration(int milliseconds) {
+		try {
+			Thread.sleep(milliseconds);
+		} catch (InterruptedException e) {
+			throw new RuntimeException("Pause was interrupted.", e);
+		}
+	}
+
+}
+
+Jos panaudojimo pavyzdys:
+
+int[] numbers = new int[] {1, 2, 3};
+for (int i = 0; i < numbers.length; i++) {
+  System.out.println(numbers[i]);
+  Pause.duration(1000);
+}
+
+Skaičius nuo 1 iki 3 išspausdins kas sekundę.
+
+*** Programos realizacijos reikalavimai
+
+- Turi būti sukurtos 3 pagrindinės klasės:
+  - App - programos paleidimui
+  - Song - reprezentuoja dainą
+  - SongPlayer - groja dainas
+- Song turi turėti šias savybes (žemiau pateiktas klasės skeletas):
+
+  public class Song {
+	public Song(String title, List<String> lyrics) {
+	   // TODO: implement me
+	}
+
+	public List<String> getLyrics() {
+	   // TODO: implement me
+	}
+
+	public String getTitle() {
+	   // TODO: implement me
+	}
+  }
+- SongPlayer turi turėti šias savybes (žemiau pateiktas klasės skeletas):
+
+  public class SongPlayer {
+	public void setSpeed(int speed) {
+	   // TODO: implement me
+	}
+
+	public void setSong(final Song song) {
+	   // TODO: implement me
+	}
+
+	public void play() {
+	   // TODO: implement me
+	}
+
+}
+
+*** Programos panaudojimo pavyzdys (pavyzdinis main metodas)
+
+import java.util.Arrays;
+
+public class App {
+
+	public static void main(String[] args) {
+		final Song song = new Song("Yesterday", Arrays.asList("Yesterday all my troubles seemed so far away.",
+								     "Now it looks as though they're here to stay.",
+								     "Oh, I believe in yesterday.",
+								     "Suddenly I'm not half the man I used to be.",
+								     "There's a shadow hanging over me.",
+								     "Oh, yesterday came suddenly.",
+								     "Why she had to go, I don't know, she wouldn't say.",
+								     "I said something wrong, now I long for yesterday.",
+								     "Yesterday love was such an easy game to play.",
+								     "Now I need a place to hide away.",
+								     "Oh, I believe in yesterday.",
+								     "Why she had to go, I don't know, she wouldn't say.",
+								     "I said something wrong, now I long for yesterday.",
+								     "Yesterday love was such an easy game to play.",
+								     "Now I need a place to hide away.",
+								     "Oh, I believe in yesterday.",
+								     "Mm mm mm mm mm mm mm"));
+
+		final SongPlayer player = new SongPlayer();
+		player.setSong(song);
+		player.setSpeed(5);
+		player.play();
+	}
+
+}
+
+Rezultatas konsolėje (eilutės buvo išspausdintos kas 200 milisekundžių):
+
+[Yesterday]: Yesterday all my troubles seemed so far away.
+[Yesterday]: Now it looks as though they're here to stay.
+[Yesterday]: Oh, I believe in yesterday.
+[Yesterday]: Suddenly I'm not half the man I used to be.
+[Yesterday]: There's a shadow hanging over me.
+[Yesterday]: Oh, yesterday came suddenly.
+[Yesterday]: Why she had to go, I don't know, she wouldn't say.
+[Yesterday]: I said something wrong, now I long for yesterday.
+[Yesterday]: Yesterday love was such an easy game to play.
+[Yesterday]: Now I need a place to hide away.
+[Yesterday]: Oh, I believe in yesterday.
+[Yesterday]: Why she had to go, I don't know, she wouldn't say.
+[Yesterday]: I said something wrong, now I long for yesterday.
+[Yesterday]: Yesterday love was such an easy game to play.
+[Yesterday]: Now I need a place to hide away.
+[Yesterday]: Oh, I believe in yesterday.
+[Yesterday]: Mm mm mm mm mm mm mm
