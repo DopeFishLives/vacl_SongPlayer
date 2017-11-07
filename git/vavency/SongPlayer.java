@@ -14,11 +14,12 @@ public class SongPlayer
 
     public void setSong(final Song song)
     {
-
+        this.sng = song;
     }
 
     public void play()
     {
+        
     }
 
 }
