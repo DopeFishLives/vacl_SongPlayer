@@ -13,9 +13,9 @@ public class Song {
         this.sng = title;
     }
 
-    public List<String> getLyrics()
+    public Object getLyrics(int i)
     {
-        return this.lyr;
+        return this.lyr.get(i);
     }
 
     public String getTitle()
@@ -23,4 +23,8 @@ public class Song {
         return this.sng;
     }
 
+    public int size()
+    {
+        return this.lyr.size();
+    }
 }

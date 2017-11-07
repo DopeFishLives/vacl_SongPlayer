@@ -19,7 +19,10 @@ public class SongPlayer
 
     public void play()
     {
-        
+        for(int i=0; i<sng.size();i++)
+        {
+            System.out.println("[" + sng.getTitle() + "]: " + sng.getLyrics(i));
+        }
     }
 
 }
