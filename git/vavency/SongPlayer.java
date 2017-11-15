@@ -1,6 +1,7 @@
 package git.vavency;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SongPlayer
 {
@@ -22,7 +23,7 @@ public class SongPlayer
         for(int i=0; i<sng.size();i++)
         {
             System.out.println("[" + sng.getTitle() + "]: " + sng.getLyrics(i));
-            new Pause(1000/this.spd);
+            TimeUnit.MILLISECONDS.sleep(1000/this.spd);
         }
     }
 
