@@ -4,7 +4,9 @@ import java.util.Arrays;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+
         final Song song = new Song("Yesterday", Arrays.asList("Yesterday all my troubles seemed so far away.",
                 "Now it looks as though they're here to stay.",
                 "Oh, I believe in yesterday.",
