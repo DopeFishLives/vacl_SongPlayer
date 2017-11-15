@@ -26,20 +26,18 @@ public class App {
                 "Now I need a place to hide away.",
                 "Oh, I believe in yesterday.",
                 "Mm mm mm mm mm mm mm"));
+
+
         try
         {
             int name=0;
+
             for(int i=0; i<args.length;i++)
             {
-                try
-                {
-                    spee = Integer.parseInt(args[i]);
-                }
-                catch(Exception|Error e)
-                {
-                    name=i;
-                }
+                try { spee = Integer.parseInt(args[i]); }
+                catch(Exception|Error e) { name=i; }
             }
+
             File sng = new File(args[name]+".ogg");
             File lyr = new File(args[name]+".txt");
             if(sng.exists() && lyr.exists())

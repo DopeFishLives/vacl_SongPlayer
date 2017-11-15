@@ -17,14 +17,7 @@ public class SongPlayer
     private Song sng = new Song(null, null);
 
 
-    //OpenAL setup
-    private String defaultDeviceName = alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER); //Getting the device
-    private long device = alcOpenDevice(defaultDeviceName); //Open the device.
 
-    private int[] atributes = {0}; //Set atributes
-    private long context = alcCreateContext(device, atributes); //Makes a context
-
-    private ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
 
 
     public void setSpeed(int speed)
@@ -39,8 +32,17 @@ public class SongPlayer
 
     public void play()
     {
-        alcMakeContextCurrent(this.context);
-        ALCapabilities alCapabilities = AL.createCapabilities(this.alcCapabilities);
+        //OpenAL setup
+        String defaultDeviceName = alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER); //Getting the device
+        long device = alcOpenDevice(defaultDeviceName); //Open the device.
+
+        int[] atributes = {0}; //Set atributes
+        long context = alcCreateContext(device, atributes); //Makes a context
+        alcMakeContextCurrent(context);
+
+        ALCCapabilities alcCapabilities = ALC.createCapabilities(device);
+        ALCapabilities alCapabilities = AL.createCapabilities(alcCapabilities);
+
         if(alCapabilities.OpenAL10)
         {
             for(int i=0; i<sng.size();i++)
@@ -51,8 +53,8 @@ public class SongPlayer
                 } catch (InterruptedException e) {}
             }
 
-            alcDestroyContext(this.context);
-            alcCloseDevice(this.device);
+            alcDestroyContext(context);
+            alcCloseDevice(device);
         }
     }
 

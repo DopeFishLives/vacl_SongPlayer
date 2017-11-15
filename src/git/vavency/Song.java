@@ -23,6 +23,16 @@ public class Song {
         return this.sng;
     }
 
+    public void setTitle(String newsng)
+    {
+        this.sng = newsng;
+    }
+
+    public void setLyrics(List newlyr)
+    {
+        this.lyr = newlyr;
+    }
+
     public int size()
     {
         return this.lyr.size();
