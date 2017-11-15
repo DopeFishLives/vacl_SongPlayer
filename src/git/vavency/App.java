@@ -1,12 +1,14 @@
 package git.vavency;
 
 import java.util.Arrays;
+import java.util.Scanner;
+import java.io.File;
 
 public class App {
 
     public static void main(String[] args)
     {
-
+        int spee=5;
         final Song song = new Song("Yesterday", Arrays.asList("Yesterday all my troubles seemed so far away.",
                 "Now it looks as though they're here to stay.",
                 "Oh, I believe in yesterday.",
@@ -24,10 +26,32 @@ public class App {
                 "Now I need a place to hide away.",
                 "Oh, I believe in yesterday.",
                 "Mm mm mm mm mm mm mm"));
+        try
+        {
+            int name=0;
+            for(int i=0; i<args.length;i++)
+            {
+                try
+                {
+                    spee = Integer.parseInt(args[i]);
+                }
+                catch(Exception|Error e)
+                {
+                    name=i;
+                }
+            }
+            File sng = new File(args[name]+".ogg");
+            File lyr = new File(args[name]+".txt");
+            if(sng.exists() && lyr.exists())
+            {
+
+            }
+        }
+        catch (Exception|Error e){}
 
         final SongPlayer player = new SongPlayer();
         player.setSong(song);
-        player.setSpeed(5);
+        player.setSpeed(spee);
         player.play();
     }
 }
