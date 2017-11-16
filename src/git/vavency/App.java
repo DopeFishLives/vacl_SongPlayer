@@ -1,14 +1,13 @@
 package git.vavency;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.io.File;
 
 public class App {
 
     public static void main(String[] args)
     {
-        int spee=5;
+        float spee=5;
         final Song song = new Song("Yesterday", Arrays.asList("Yesterday all my troubles seemed so far away.",
                 "Now it looks as though they're here to stay.",
                 "Oh, I believe in yesterday.",
@@ -28,24 +27,32 @@ public class App {
                 "Mm mm mm mm mm mm mm"));
 
 
-        try
+        try // Oh boy, lets begin.
         {
-            int name=0;
+            int name=0; //index of song name
 
-            for(int i=0; i<args.length;i++)
+            for(int i=0; i<args.length;i++) // Some one will want to to add speed.
             {
-                try { spee = Integer.parseInt(args[i]); }
-                catch(Exception|Error e) { name=i; }
+                try { spee = Integer.parseInt(args[i]); } // Fail and see if it worked,
+                catch(Exception|Error e) { name=i; } // Lets just assume if it failed, it's a song name.
             }
 
-            File sng = new File(args[name]+".ogg");
-            File lyr = new File(args[name]+".txt");
-            if(sng.exists() && lyr.exists())
+            File sng = new File(args[name]+".ogg");     //It's to check if it exists.
+            File lyr = new File(args[name]+".txt");     //To check if it exists, the to read the file
+            if(sng.exists() && lyr.exists())                     // Existential crisis.
             {
+                List newLyr = null;                              //I need a new list, not you.
+                Scanner scam = new Scanner(lyr);                 // New nigerian prince SCAM.
 
-            }
+                while(scam.hasNextLine())                        // We don't want to crash everything, am I right?
+                    newLyr.add(scam.nextLine());
+
+                scam.close();                                    // Nice and tidy
+                song.setTitle(args[name]);                       //Setting a new title.
+                song.setLyrics(newLyr);                          //REPLACE OLD WITH THE NEW. YEAH!!!
+            } // Fin
         }
-        catch (Exception|Error e){}
+        catch (Exception|Error e){} // Shh, we don't want for the user to see that we're burning and crashed in to WTC on 9/11.
 
         final SongPlayer player = new SongPlayer();
         player.setSong(song);

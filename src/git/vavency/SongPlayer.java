@@ -1,5 +1,7 @@
 package git.vavency;
 
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 import java.util.concurrent.TimeUnit;
 import org.lwjgl.openal.*;
 
@@ -9,18 +11,19 @@ import static org.lwjgl.stb.STBVorbis.*;
 import static org.lwjgl.system.MemoryStack.stackMallocInt;
 import static org.lwjgl.system.MemoryStack.stackPop;
 import static org.lwjgl.system.MemoryStack.stackPush;
+import static org.lwjgl.system.libc.LibCStdlib.free;
 //import static org.lwjgl.system.libc.Stdlib.free;
 
 public class SongPlayer
 {
-    private int spd;
+    private float spd;
     private Song sng = new Song(null, null);
 
 
 
 
 
-    public void setSpeed(int speed)
+    public void setSpeed(float speed)
     {
         this.spd = speed;
     }
@@ -45,17 +48,64 @@ public class SongPlayer
 
         if(alCapabilities.OpenAL10)
         {
-            for(int i=0; i<sng.size();i++)
-            {
-                System.out.println("[" + sng.getTitle() + "]: " + sng.getLyrics(i));
-                try {
-                    TimeUnit.MILLISECONDS.sleep(1000/this.spd);
-                } catch (InterruptedException e) {}
-            }
+                String sng_file = this.sng.getTitle() + ".ogg";
 
+                stackPush();
+                IntBuffer chanBuff = stackMallocInt(1);
+                stackPush();
+                IntBuffer sampleRateBuff = stackMallocInt(1);
+
+                ShortBuffer rawAudio = stb_vorbis_decode_filename(sng_file, chanBuff, sampleRateBuff);
+
+                int chnls = chanBuff.get();
+                int smpl_rt = sampleRateBuff.get();
+
+                stackPop();
+                stackPop();
+
+                int form = -1;
+
+                if (chnls == 1) {
+                    form = AL_FORMAT_MONO16;
+                } else {
+                    form = AL_FORMAT_STEREO16;
+                }
+
+                int buff_Point = alGenBuffers();
+
+            try {
+                alBufferData(buff_Point, form, rawAudio, smpl_rt); // has an tendency of throwing
+
+                free(rawAudio);
+
+
+                int srcPnt = alGenSources();
+
+                alSourcei(srcPnt, AL_BUFFER, buff_Point);
+
+                alSourcef(srcPnt, AL_PITCH, (1/this.spd));
+
+                alSourcef(srcPnt, AL_VELOCITY, (1/this.spd));
+
+                alSourcePlay(srcPnt);
+
+            } catch (Exception e) {};
+
+
+            for(int i=0; i<this.sng.size();i++)
+                {
+                    System.out.println("[" + this.sng.getTitle() + "]: " + this.sng.getLyrics(i));
+                    try {
+                        short sd = (short) (1000/this.spd); // Can't be that big, right?
+                        TimeUnit.MILLISECONDS.sleep(sd);
+                    } catch (InterruptedException e) {}
+                }
+
+            alDeleteBuffers(buff_Point);
             alcDestroyContext(context);
             alcCloseDevice(device);
         }
+
     }
 
 }
