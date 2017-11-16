@@ -12,7 +12,6 @@ import static org.lwjgl.system.MemoryStack.stackMallocInt;
 import static org.lwjgl.system.MemoryStack.stackPop;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.libc.LibCStdlib.free;
-//import static org.lwjgl.system.libc.Stdlib.free;
 
 public class SongPlayer
 {
@@ -74,9 +73,9 @@ public class SongPlayer
                 int buff_Point = alGenBuffers();
 
             try {
-                alBufferData(buff_Point, form, rawAudio, smpl_rt); // has an tendency of throwing
+                alBufferData(buff_Point, form, rawAudio, smpl_rt); // has an tendency of throwing exceptions
 
-                free(rawAudio);
+                free(rawAudio); //Release the buffer.
 
 
                 int srcPnt = alGenSources();
