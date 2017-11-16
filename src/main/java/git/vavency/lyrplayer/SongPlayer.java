@@ -1,4 +1,4 @@
-package git.vavency;
+package git.vavency.lyrplayer;
 
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
@@ -17,10 +17,6 @@ public class SongPlayer
 {
     private float spd;
     private Song sng = new Song(null, null);
-
-
-
-
 
     public void setSpeed(float speed)
     {

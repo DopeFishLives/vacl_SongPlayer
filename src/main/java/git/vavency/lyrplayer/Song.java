@@ -1,4 +1,4 @@
-package git.vavency;
+package git.vavency.lyrplayer;
 
 import java.util.List;
 

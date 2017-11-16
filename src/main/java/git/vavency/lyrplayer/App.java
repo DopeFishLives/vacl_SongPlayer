@@ -1,4 +1,4 @@
-package git.vavency;
+package git.vavency.lyrplayer;
 
 import java.util.*;
 import java.io.File;
@@ -7,8 +7,8 @@ public class App {
 
     public static void main(String[] args)
     {
-        float spee=5;
-        final Song song = new Song("Yesterday", Arrays.asList("Yesterday all my troubles seemed so far away.",
+        float spee = (float) 1;
+        final Song song = new Song("Yesterday`", Arrays.asList("Yesterday all my troubles seemed so far away.",
                 "Now it looks as though they're here to stay.",
                 "Oh, I believe in yesterday.",
                 "Suddenly I'm not half the man I used to be.",
@@ -33,7 +33,7 @@ public class App {
 
             for(int i=0; i<args.length;i++) // Some one will want to to add speed.
             {
-                try { spee = Integer.parseInt(args[i]); } // Fail and see if it worked,
+                try { spee = Float.parseFloat(args[i]); } // Fail and see if it worked,
                 catch(Exception|Error e) { name=i; } // Lets just assume if it failed, it's a song name.
             }
 
