@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName='git.vavency.lyrplaye.App'
+mainClassName='git.vavency.lyrplayer.App'
 
 import org.gradle.internal.os.OperatingSystem
 

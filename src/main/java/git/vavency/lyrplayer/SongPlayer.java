@@ -87,6 +87,8 @@ public class SongPlayer
             } catch (Exception e) {};
 
 
+                //System.out.println(System.getenv());
+
             for(int i=0; i<this.sng.size();i++)
                 {
                     System.out.println("[" + this.sng.getTitle() + "]: " + this.sng.getLyrics(i));
