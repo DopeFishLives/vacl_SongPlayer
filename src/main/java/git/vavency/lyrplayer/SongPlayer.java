@@ -43,7 +43,7 @@ public class SongPlayer
 
         if(alCapabilities.OpenAL10)
         {
-                String sng_file = this.sng.getTitle() + ".ogg";
+                String sng_file = this.sng.getWorkDir() + this.sng.getTitle() + ".ogg";
 
                 stackPush();
                 IntBuffer chanBuff = stackMallocInt(1);

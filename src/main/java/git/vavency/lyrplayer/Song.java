@@ -5,12 +5,23 @@ import java.util.List;
 public class Song {
 
     private String sng;
+    private String work_dir = "";
     private List lyr;
 
     public Song(String title, List<String> lyrics)
     {
         this.lyr = lyrics;
         this.sng = title;
+    }
+
+    public void setWorkDir(String str)
+    {
+        this.work_dir = str;
+    }
+
+    public String getWorkDir()
+    {
+        return this.work_dir;
     }
 
     public Object getLyrics(int i)
