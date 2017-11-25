@@ -78,19 +78,17 @@ public class SongPlayer
 
                 alSourcei(srcPnt, AL_BUFFER, buff_Point);
 
-                alSourcef(srcPnt, AL_PITCH, (1/this.spd));
+                alSourcef(srcPnt, AL_PITCH, (this.spd));
 
-                alSourcef(srcPnt, AL_VELOCITY, (1/this.spd));
+                alSourcef(srcPnt, AL_VELOCITY, (this.spd)); //Nightcore/slowmo mode activated
 
                 alSourcePlay(srcPnt);
 
             } catch (Exception e) {};
 
-
-                //System.out.println(System.getenv());
-
             for(int i=0; i<this.sng.size();i++)
                 {
+                    //if(new String(this.sng.getLyrics(i)).contains("[skip="))
                     System.out.println("[" + this.sng.getTitle() + "]: " + this.sng.getLyrics(i));
                     try {
                         short sd = (short) (1000/this.spd); // Can't be that big, right?
